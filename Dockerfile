@@ -32,15 +32,17 @@ RUN apt-get install -y \
         git \
         iproute2 \
         ros-${ROS_DISTRO}-ros-core \
-        ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
+        ros-${ROS_DISTRO}-rmw-cyclonedds-cos-humble-moveitpp \
         ros-dev-tools && \
+        ros-${ROS_DISTRO}-moveit && \
+        ros-${ROS_DISTRO}-gazebo-ros2-control && \
     rm -rf /var/lib/apt/lists/*
 
 RUN useradd -ms /bin/bash user \
     && echo "user:user" | chpasswd \
     && usermod -aG sudo user \
     && echo 'user ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/user \
-    && usermod --uid 1000 user \
+    && usermod --uid 1000 user 
     && usermod --gid 1000 user   
 
 USER user
